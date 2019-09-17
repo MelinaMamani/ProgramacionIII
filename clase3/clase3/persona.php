@@ -4,6 +4,7 @@ class Persona
 {
     public $nombre;
     public $apellido;
+    public $legajo;
 
     #Parametros opcionales como en la siguiente linea
     public function __construct($nombre = "",$apellido = "",$legajo = 0)
