@@ -1,0 +1,2 @@
+P,juan,jp@gmail.com,./Fotos/Pjuan.jpg
+H,Gabriel,gh@gmail.com,./Fotos/HGabriel.jpg
