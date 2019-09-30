@@ -3,7 +3,7 @@
 require_once './clases/materia.php';
 
 $Materia = new Materia((int)$_POST["codigo"],$_POST["nombre"],(int)$_POST["cupo"],(int)$_POST["aula"]);
-if((Materia::ValidarCodigo($_POST["codigo"],"./archivos/materias.txt"))!=-1)
+if((Materia::ValidarCodigo((int)$_POST["codigo"],"./archivos/materias.txt"))!=-1)
 {
     if($Materia->cargarMateria("./archivos/materias.txt"))
     {

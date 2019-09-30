@@ -1,20 +1,34 @@
 <?php
 
+require_once './clases/materia.php';
 require_once './clases/inscripciones.php';
 
-$inscripcion = new Inscripciones($_POST["apellido"],$_POST["nombre"],$_POST["email"],(int)$_POST["codigo"],$_POST["materia"]);
-if((Inscripciones::ValidarEmail($_POST["email"],"./archivos/inscripcions.txt"))!=-1)
+$inscripcion = new Inscripciones((int)$_POST["codigo"],$_POST["materia"],$_POST["apellido"],$_POST["nombre"],$_POST["email"]);
+if((Materia::ValidarCodigo($_POST["codigo"],"./archivos/materias.txt"))==-1)
 {
-    $foto = $inscripcion->GuardarFoto("./Fotos");
-    $inscripcion->foto = $foto;
-    if($inscripcion->cargarinscripcion("./archivos/inscripcions.txt"))
+    $materia = Materia::VerificarMateria($_POST["codigo"],"./archivos/materias.txt");
+
+    if ($materia->cupo > 0) 
     {
-        echo "<br>La inscripcion se ha cargado.</br>";
+        if($inscripcion->cargarInscripcion("./archivos/inscripciones.txt"))
+        {
+            $materia->ModificarMateria("./archivos/materias.txt");
+            echo "<br>La inscripción se ha realizado.</br>";
+        }
+    } 
+    
+    else {
+        echo "<br>Ya no hay cupo para la materia.</br>";
     }
+    
 }
 else
 {
-    echo "<br>La inscripcion ya se encuentra en la base de datos";
+    echo "<br>La materia no existe.</br>";
 }
+
+
+
+//echo json_encode($materia);
 
 ?>
