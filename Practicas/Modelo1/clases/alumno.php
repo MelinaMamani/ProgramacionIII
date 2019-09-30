@@ -108,11 +108,11 @@ class Alumno
     {
         $nombreArchivo = "";
         $arrayNombre = explode(".",$FotoExistente);
-        date_default_timezone_set('America/Argentina/Buenos_Aires'); //Seteo la zona horaria para que al imprimir la hora sea la hora local de argentina
-        $fecha = date("d\-m\-y--H\.i\.s"); //Recibo la hora en formato dia-Mes-Año--Hora.Minuto.Seugndo
-        $nombreArchivo .= $this->apellido . "_" . $fecha . '.' . $arrayNombre[2]; //Creo el nombre del archivo con el Legajo, nombre, fecha y extension
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
+        $fecha = date("d\-m\-y--H\.i\.s");
+        $nombreArchivo .= $this->apellido . "_" . $fecha . '.' . $arrayNombre[2];
         $pathBackup .= '/' . $nombreArchivo;        
-        rename($FotoExistente,$pathBackup); //Muevo la foto a archivos Backup 
+        rename($FotoExistente,$pathBackup);
     }
 
     private function PonerMarcaDeAgua($archivo,$path)
@@ -164,6 +164,74 @@ class Alumno
         foreach($Alumnos as $Alumno)
         {
             $Alumno->MostrarAlumno();
+        }
+    }
+
+    public function ModificarAlumno($dirFile)
+    {
+        $Alumnos = Alumno::ConstruirAlumnos($dirFile);
+        $indice = Alumno::BuscarIndiceArray($Alumnos,$this->email);
+        if($indice != -1)
+        {
+            $Alumnos[$indice]->apellido = $this->apellido;
+            $Alumnos[$indice]->nombre = $this->nombre;
+            $this->GuardarFoto("./Fotos");
+            Alumno::VaciarArchivo($dirFile);
+            foreach($Alumnos as $Alumno)
+            {
+                $Alumno->cargarAlumno($dirFile);
+            }
+        }
+        else
+        {
+            echo "<br>El Alumno que intenta modificar no se encuentra en la base de datos";
+        }
+    }
+
+    private static function VaciarArchivo($dirFile)
+    {
+        if(file_exists($dirFile))
+        {
+            $resource = fopen($dirFile,"w");
+            fclose($resource);   
+        }
+    }
+
+    private static function BuscarIndiceArray($Alumnos, $email)
+    {
+        $indice = -1;
+        for($i = 0; $i < count($Alumnos); $i++)
+        {    
+            if($Alumnos[$i]->email == $email)
+            {
+                $indice = $i; 
+            }
+        }
+        return $indice;
+    }
+
+    public static function AlumnosEnTabla($dirFile)
+    {
+        $Alumnos = Alumno::ConstruirAlumnos($dirFile);
+        if($Alumnos != NULL)
+        {
+            echo "<table border='1'>
+            <tr>
+                <th>Apellido</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Foto</th>
+            </tr>";
+
+            foreach($Alumnos as $alumno)
+            {
+                echo "<tr><td>".$alumno->apellido."</td>";
+                echo "<td>".$alumno->nombre."</td>";
+                echo "<td>".$alumno->email."</td>";
+                echo "<td><img src=".$alumno->foto." style='width:4em; height:3em;'></td></tr>";
+            }
+
+            echo "</table>";
         }
     }
 }

@@ -3,7 +3,7 @@
 require_once './clases/materia.php';
 require_once './clases/inscripciones.php';
 
-$inscripcion = new Inscripciones((int)$_POST["codigo"],$_POST["materia"],$_POST["apellido"],$_POST["nombre"],$_POST["email"]);
+$inscripcion = new Inscripciones($_POST["apellido"],$_POST["nombre"],$_POST["email"],(int)$_POST["codigo"],$_POST["materia"]);
 if((Materia::ValidarCodigo($_POST["codigo"],"./archivos/materias.txt"))==-1)
 {
     $materia = Materia::VerificarMateria($_POST["codigo"],"./archivos/materias.txt");
@@ -26,9 +26,5 @@ else
 {
     echo "<br>La materia no existe.</br>";
 }
-
-
-
-//echo json_encode($materia);
 
 ?>

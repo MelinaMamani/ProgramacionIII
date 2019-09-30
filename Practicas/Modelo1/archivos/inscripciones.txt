@@ -1,1 +1,2 @@
-Juan,juanc@gmail.com,110,Matematica,Coco
+110,Matematica,Coco,Juan,juanc@gmail.com
+111,Lengua,Cruz,Juana,juanac@gmail.com

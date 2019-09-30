@@ -1,2 +1,2 @@
-P,juan,jp@gmail.com,./Fotos/Pjuan.jpg
-H,Gabriel,gh@gmail.com,./Fotos/HGabriel.jpg
+Cala,Josefa,gh@gmail.com,./Fotos/TotoJosefina.jpg
+Gele,Juan,gj@gmail.com,./Fotos/GeleJosefa.jpg

@@ -32,7 +32,7 @@ switch ($caso) {
         break;
 
     default:
-        # code...
+        echo "No existe este caso."
         break;
 }
 
