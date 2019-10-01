@@ -1,0 +1,3 @@
+1000,Maria,mm@gmail.com,1234,./img/fotos/1000-1.jpg,./img/fotos/1000-2.jpg
+1001,Jose,jm@gmail.com,1666,./img/fotos/1001-1.jpg,./img/fotos/1001-2.jpg
+10011,aaaa,jk@gmail.com,9000,./img/fotos/10011-1.jpg,./img/fotos/10011-2.jpg

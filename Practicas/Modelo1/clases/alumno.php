@@ -5,7 +5,7 @@ class Alumno
     public $nombre;
     public $apellido;
     public $email;
-    
+
     public function __construct($apellido,$nombre,$email)
     {
         $this->nombre = $nombre;
@@ -37,16 +37,16 @@ class Alumno
         return true;
     }
 
-    public static function ValidarEmail($email, $dirFile)
+    public static function ValidarLegajo($legajo, $dirFile)
     {
         $Alumnos = Alumno::ConstruirAlumnos($dirFile);
         if($Alumnos !=NULL)
         {
             foreach($Alumnos as $Alumno)
             {
-                if($Alumno->email == $email)
+                if($Alumno->legajo == $legajo)
                 {
-                  return -1;  
+                  return -1;
                 }
             }
         }
@@ -111,7 +111,7 @@ class Alumno
         date_default_timezone_set('America/Argentina/Buenos_Aires');
         $fecha = date("d\-m\-y--H\.i\.s");
         $nombreArchivo .= $this->apellido . "_" . $fecha . '.' . $arrayNombre[2];
-        $pathBackup .= '/' . $nombreArchivo;        
+        $pathBackup .= '/' . $nombreArchivo;
         rename($FotoExistente,$pathBackup);
     }
 
@@ -119,10 +119,10 @@ class Alumno
     {
         $marca = imagecreatefrompng('./Fotos/sello.png');
         $imagen = imagecreatefromjpeg($archivo);
-        $margenDerecho = 10; 
-        $margenIzquierdo = 10; 
-        $marcax = imagesx($marca); 
-        $marcay = imagesy($marca); 
+        $margenDerecho = 10;
+        $margenIzquierdo = 10;
+        $marcax = imagesx($marca);
+        $marcay = imagesy($marca);
         imagecopy($imagen, $marca, imagesx($imagen) - $marcax - $margenDerecho, imagesy($imagen) - $marcay - $margenIzquierdo,0,0,$marcax,$marcay);
         imagepng($imagen,$path);
     }
@@ -193,7 +193,7 @@ class Alumno
         if(file_exists($dirFile))
         {
             $resource = fopen($dirFile,"w");
-            fclose($resource);   
+            fclose($resource);
         }
     }
 
@@ -201,10 +201,10 @@ class Alumno
     {
         $indice = -1;
         for($i = 0; $i < count($Alumnos); $i++)
-        {    
+        {
             if($Alumnos[$i]->email == $email)
             {
-                $indice = $i; 
+                $indice = $i;
             }
         }
         return $indice;

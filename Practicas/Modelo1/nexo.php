@@ -10,11 +10,11 @@ switch ($caso) {
     case 'consultarAlumno':
         include_once 'consultarAlumno.php';
         break;
-    
+
     case 'cargarMateria':
         include_once 'cargarMateria.php';
         break;
-    
+
     case 'inscribirAlumno':
         include_once 'inscribirAlumno.php';
         break;
@@ -32,7 +32,7 @@ switch ($caso) {
         break;
 
     default:
-        echo "No existe este caso."
+        echo "No existe este caso.";
         break;
 }
 
