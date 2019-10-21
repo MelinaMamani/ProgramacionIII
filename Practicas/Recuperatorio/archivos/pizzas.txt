@@ -1,0 +1,3 @@
+1,300,molde,jamon,677,./img/pizzas/1-1.jpg,./img/pizzas/1-2.jpg
+2,500,piedra,jamon,677,./img/pizzas/2-1.jpg,./img/pizzas/2-2.jpg
+3,500,piedra,jamon,800,./img/pizzas/3-1.jpg,./img/pizzas/3-2.jpg
