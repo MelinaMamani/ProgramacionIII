@@ -3,28 +3,40 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 require_once './vendor/autoload.php';
+require_once './clases/usuario.php';
 
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
 
 $app = new \Slim\App(["settings" => $config]);
 
-$app->get('/', function (Request $request, Response $response) {    
-    $response->withStatus(200)->write("GET => Bienvenido!!! a SlimFramework");
-    return $response;
-});
+$app->post('/cargarUsuario', function (Request $request, Response $response) {    
+    $campos = $request->getParsedBody();
+    $obj = new stdClass();
+    $obj->estado = "No se da de alta.";
 
-$app->post('/', function (Request $request, Response $response) {    
-    $response->getBody()->write("POST => Bienvenido!!! a SlimFramework");
-    return $response;
-});
-$app->put('/', function (Request $request, Response $response) {    
-    $response->getBody()->write("PUT => Bienvenido!!! a SlimFramework");
-    return $response;
-});
-$app->delete('/', function (Request $request, Response $response) {    
-    $response->getBody()->write("DELETE => Bienvenido!!! a SlimFramework");
-    return $response;
+    $usuario = new usuario($campos["legajo"],$campos["nombre"],$campos["email"],$campos["clave"]);
+
+    if((Usuario::ValidarLegajo($campos["legajo"],"./archivos/usuarios.txt"))!=-1)
+    {
+        $foto1 = $usuario->GuardarFoto1("./img/fotos");
+        $usuario->foto1 = $foto1;
+
+        $foto2 = $usuario->GuardarFoto2("./img/fotos");
+        $usuario->foto2 = $foto2;
+
+        if($usuario->cargarUsuario("./archivos/usuarios.txt"))
+        {
+            $obj->estado = "Se da de alta.";
+        }
+    }
+    else
+    {
+        $obj->estado = "El usuario ya está dado de alta.";
+    }
+
+    $newResponse = $response->withJson($obj,200);
+    return $newResponse;
 });
 
 $app->group('/grupo', function (){
