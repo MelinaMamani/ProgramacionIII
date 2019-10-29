@@ -1,0 +1,9 @@
+GET,/clase6/usuario/,2019-10-29,::1
+POST,/clase6/usuario/,2019-10-29,::1
+PUT,/clase6/usuario/,2019-10-29,::1
+DELETE,/clase6/usuario/,2019-10-29,::1
+DELETE,/clase6/Crear,2019-10-29,::1
+POST,/clase6/Crear,2019-10-29,::1
+POST,/clase6/Verificar,2019-10-29,::1
+POST,/clase6/Crear,2019-10-29,::1
+POST,/clase6/Verificar,2019-10-29,::1
