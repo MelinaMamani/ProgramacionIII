@@ -11,10 +11,7 @@ $config['addContentLengthHeader'] = false;
 $app = new \Slim\App(["settings" => $config]);
 
 $app->group('/pizzas', function (){
-    $this->get('/', function ($request, $response) {    
-        $response->getBody()->write("API=> GET");
-        return $response;
-    });
+    $this->get('/', \operaciones::class . ':consultaPizza');
     
     $this->post('/', \operaciones::class . ':altaPizza');
 });

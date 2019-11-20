@@ -158,13 +158,32 @@ class Pizza
         {
             foreach($Pizzas as $Pizza)
             {
-                if($Pizza->sabor == $sabor && $Pizza->tipo == $tipo)
+                if($Pizza->sabor === $sabor && $Pizza->tipo === $tipo)
                 {
                     $flag = true;
                     break;
                 }
             }
         }
+    }
+
+    public static function RetornarCant($dirFile, $sabor, $tipo)
+    {
+        $Pizzas = Pizza::ConstruirPizzas($dirFile);
+        $cantidad = 0;
+        if($Pizzas != NULL)
+        {
+            foreach($Pizzas as $Pizza)
+            {
+                if($Pizza->sabor === $sabor && $Pizza->tipo === $tipo)
+                {
+                    $cantidad = $Pizza->cantidad;
+                    break;
+                }
+            }
+        }
+        echo $cantidad;
+        return $cantidad;
     }
 
     public function ModificarPizza($dirFile)
